@@ -2,17 +2,21 @@ import { useState, useEffect, useRef } from "react";
 
 function SearchBar({ onChange }) {
     const [search, setSearch] = useState("");
-    const previousSearch = useRef("");  // Keeps track of the previous search term
+    const previousSearch = useRef(""); // Keeps track of the previous search term
 
     useEffect(() => {
         const timer = setTimeout(() => {
             // Only search if the search term has changed
-            if (search.trim() && onChange && search !== previousSearch.current) {
+            if (
+                search.trim() &&
+                onChange &&
+                search !== previousSearch.current
+            ) {
                 previousSearch.current = search;
                 onChange(search);
             }
         }, 2000);
-        
+
         return () => clearTimeout(timer);
     }, [search, onChange]);
 
