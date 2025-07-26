@@ -18,6 +18,7 @@ function App() {
     const loadInitialCards = async () => {
         setIsLoading(true);
         setError(null);
+        setCards([]); // Clear cards immediately when loading starts
 
         try {
             const cardsData = await fetchCards("", 1);
@@ -44,7 +45,9 @@ function App() {
 
         setIsLoading(true);
         setError(null);
+        setCards([]); // Clear cards immediately when search starts
         setHasSearched(true);
+        
         try {
             const cardsData = await fetchCards(searchTerm, 1);
             setCards(cardsData);
@@ -113,7 +116,8 @@ function App() {
     }
 
     function renderCards() {
-        if (cards.length > 0) {
+        // SÓ MOSTRA CARDS SE NÃO ESTIVER LOADING E TIVER CARDS
+        if (cards.length > 0 && !isLoading) {
             return (
                 <div className="mt-12">
                     <div className="text-center mb-8">
