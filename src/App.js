@@ -7,14 +7,9 @@ function App() {
     const [cards, setCards] = useState([]);
     const [isLoading, setIsLoading] = useState(false);
 
+    // Function to handle search
     const handleSearch = (searchTerm) => {
         console.log("Searching for:", searchTerm);
-
-        if (!searchTerm.trim()) {
-            setCards([]);
-            setIsLoading(false);
-            return;
-        }
 
         setIsLoading(true);
 
@@ -23,26 +18,25 @@ function App() {
                 id: 1,
                 name: "Pikachu",
                 images: {
-                    small: "https://via.placeholder.com/150x200/FFD700/000000?text=Pikachu",
                 },
             },
             {
                 id: 2,
                 name: "Charizard",
                 images: {
-                    small: "https://via.placeholder.com/150x200/FF4500/FFFFFF?text=Charizard",
                 },
             },
             {
                 id: 3,
                 name: "Bulbasaur",
                 images: {
-                    small: "https://via.placeholder.com/150x200/32CD32/000000?text=Bulbasaur",
                 },
             },
         ];
 
+        // Simulate a 2-second delay
         setTimeout(() => {
+            // Filter cards based on search term
             const filteredCards = mockCards.filter((card) =>
                 card.name.toLowerCase().includes(searchTerm.toLowerCase())
             );
