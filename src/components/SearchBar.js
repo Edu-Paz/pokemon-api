@@ -1,25 +1,20 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 
-function SearchBar({ onSearch }) {
+function SearchBar({ onChange }) {
     const [search, setSearch] = useState("");
-    const [isLoading, setIsLoading] = useState(false);
+    const previousSearch = useRef("");  // Keeps track of the previous search term
 
-    // Simulate search with a 2 second delay
     useEffect(() => {
         const timer = setTimeout(() => {
-            if (search.trim() && onSearch) {
-                setIsLoading(true);
-                onSearch(search);
-
-                // Stops loading after 2 seconds
-                setTimeout(() => {
-                    setIsLoading(false);
-                }, 2000);
+            // Only search if the search term has changed
+            if (search.trim() && onChange && search !== previousSearch.current) {
+                previousSearch.current = search;
+                onChange(search);
             }
         }, 2000);
         
         return () => clearTimeout(timer);
-    }, [search, onSearch]);
+    }, [search, onChange]);
 
     return (
         <div className="mb-8 flex justify-center">
@@ -32,13 +27,6 @@ function SearchBar({ onSearch }) {
                     className="w-full px-6 py-4 text-lg rounded-full border-2 border-white/20 bg-white/90 backdrop-blur-sm shadow-lg focus:outline-none focus:ring-4 focus:ring-blue-400/50 focus:border-blue-400 transition-all duration-300 placeholder-gray-500"
                     style={{ fontFamily: "'Fredoka', sans-serif" }}
                 />
-                
-                {/* Loading indicator */}
-                {isLoading && (
-                    <div className="absolute right-4 top-1/2 transform -translate-y-1/2">
-                        <div className="animate-spin rounded-full h-6 w-6 border-b-2 border-blue-500"></div>
-                    </div>
-                )}
             </div>
         </div>
     );
