@@ -59,8 +59,13 @@ function App() {
 
     function renderLoading() {
         return (
-            <div className="flex justify-center items-center py-8">
-                <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-500"></div>
+            <div className="flex justify-center items-center py-12">
+                <div className="relative">
+                    <div className="animate-spin rounded-full h-16 w-16 border-4 border-blue-200 border-t-blue-600"></div>
+                    <div className="absolute inset-0 flex items-center justify-center">
+                        <div className="w-8 h-8 bg-gradient-to-r from-yellow-400 to-red-500 rounded-full animate-pulse"></div>
+                    </div>
+                </div>
             </div>
         );
     }
@@ -68,9 +73,12 @@ function App() {
     function renderError() {
         if (error) {
             return (
-                <div className="text-center py-8 text-red-500 bg-red-50 rounded-lg mx-4">
-                    <p className="font-semibold">Search Error</p>
-                    <p className="text-sm">{error}</p>
+                <div className="text-center py-8 mx-4">
+                    <div className="bg-gradient-to-r from-red-50 to-red-100 border border-red-200 rounded-xl p-6 shadow-lg">
+                        <div className="text-red-500 text-4xl mb-3">⚠️</div>
+                        <p className="font-bold text-red-700 mb-2">Search Error</p>
+                        <p className="text-sm text-red-600">{error}</p>
+                    </div>
                 </div>
             );
         }
@@ -80,11 +88,14 @@ function App() {
     function renderNoResults() {
         if (hasSearched && !isLoading && cards.length === 0 && !error) {
             return (
-                <div className="text-center py-8 text-gray-500">
-                    <p className="text-lg font-semibold">No cards found</p>
-                    <p className="text-sm">
-                        Try searching for a different name
-                    </p>
+                <div className="text-center py-12 mx-4">
+                    <div className="bg-gradient-to-r from-yellow-50 to-orange-100 border border-yellow-200 rounded-xl p-6 shadow-lg">
+                        <div className="text-yellow-500 text-4xl mb-3">🔍</div>
+                        <p className="text-lg font-bold text-yellow-700 mb-2">No cards found</p>
+                        <p className="text-sm text-yellow-600">
+                            Try searching for a different name
+                        </p>
+                    </div>
                 </div>
             );
         }
@@ -94,7 +105,7 @@ function App() {
     function renderCards() {
         if (cards.length > 0) {
             return (
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mt-8">
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 mt-8">
                     {cards.map((card) => (
                         <CardItem key={card.id} card={card} />
                     ))}
@@ -105,10 +116,12 @@ function App() {
     }
 
     return (
-        <div className="App min-h-screen bg-gradient-to-br from-yellow-100 via-red-50 to-blue-100">
+        <div className="min-h-screen bg-gradient-to-br from-yellow-200 via-red-200 to-blue-200">
             <Header />
-            <main className="max-w-4xl mx-auto p-4">
-                <SearchBar onChange={handleSearch} />
+            <main className="max-w-7xl mx-auto p-6">
+                <div className="mb-8">
+                    <SearchBar onChange={handleSearch} />
+                </div>
 
                 {isLoading && renderLoading()}
                 {renderError()}
