@@ -21,14 +21,14 @@ function SearchBar({ onChange }) {
     }, [search, onChange]);
 
     return (
-        <div className="mb-12 flex justify-center -mt-8 relative z-20">
+        <div className="mb-12 flex justify-center -mt-12 relative z-30">
             <div className="relative w-full max-w-2xl">
-                <div className="absolute inset-0 bg-gradient-to-r from-blue-400 to-purple-500 rounded-3xl blur-lg opacity-30 animate-pulse"></div>
-                <div className="relative bg-white/95 backdrop-blur-xl rounded-3xl shadow-2xl border border-white/20 p-2">
+                <div className="absolute inset-0 bg-gradient-to-r from-white/30 to-white/20 rounded-3xl blur-lg"></div>
+                <div className="relative bg-white/90 backdrop-blur-xl rounded-3xl shadow-2xl border border-white/30 p-2">
                     <div className="relative">
                         {/* Search icon */}
                         <div className="absolute inset-y-0 left-0 pl-6 flex items-center pointer-events-none">
-                            <svg className="h-6 w-6 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <svg className="h-6 w-6 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
                             </svg>
                         </div>
@@ -38,7 +38,7 @@ function SearchBar({ onChange }) {
                             placeholder="Search for your favorite Pokémon cards..."
                             value={search}
                             onChange={(e) => setSearch(e.target.value)}
-                            className="w-full pl-14 pr-6 py-5 text-lg bg-transparent rounded-2xl focus:outline-none focus:ring-0 placeholder-gray-500 text-gray-800 font-medium"
+                            className="w-full pl-14 pr-6 py-5 text-lg bg-transparent rounded-2xl focus:outline-none focus:ring-0 placeholder-gray-600 text-gray-900 font-medium"
                             style={{ fontFamily: "'Fredoka', sans-serif" }}
                         />
                         
@@ -46,7 +46,7 @@ function SearchBar({ onChange }) {
                         {search && (
                             <button
                                 onClick={() => setSearch("")}
-                                className="absolute inset-y-0 right-0 pr-6 flex items-center text-gray-400 hover:text-gray-600 transition-colors duration-200"
+                                className="absolute inset-y-0 right-0 pr-6 flex items-center text-gray-500 hover:text-gray-700 transition-colors duration-200"
                             >
                                 <svg className="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12"></path>
@@ -59,7 +59,7 @@ function SearchBar({ onChange }) {
                 {/* Search hint */}
                 {search && (
                     <div className="absolute top-full left-0 right-0 mt-2 text-center">
-                        <p className="text-sm text-gray-500 bg-white/80 backdrop-blur-sm rounded-full px-4 py-2 inline-block shadow-lg">
+                        <p className="text-sm text-white/90 bg-black/20 backdrop-blur-sm rounded-full px-4 py-2 inline-block shadow-lg">
                             Searching in 2 seconds...
                         </p>
                     </div>

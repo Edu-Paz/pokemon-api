@@ -3,18 +3,18 @@ import placeholderCard from "../assets/placeholder-card.png";
 function CardItem({ card, index }) {
     return (
         <div 
-            className="group relative bg-white rounded-3xl shadow-lg hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-2 hover:scale-105 overflow-hidden border border-gray-100"
+            className="group relative bg-white/95 backdrop-blur-sm rounded-3xl shadow-xl hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-3 hover:scale-105 overflow-hidden border border-white/20"
             style={{
                 animationDelay: `${index * 100}ms`,
                 animation: 'fadeInUp 0.6s ease-out forwards'
             }}
         >
             {/* Gradient overlay */}
-            <div className="absolute inset-0 bg-gradient-to-br from-blue-400/5 via-purple-400/5 to-pink-400/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+            <div className="absolute inset-0 bg-gradient-to-br from-blue-400/10 via-purple-400/10 to-pink-400/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
             
             {/* Card image container */}
             <div className="relative p-6 pb-4">
-                <div className="relative w-full h-64 bg-gradient-to-br from-gray-50 to-gray-100 rounded-2xl mb-4 flex items-center justify-center overflow-hidden shadow-inner">
+                <div className="relative w-full h-64 bg-gradient-to-br from-white/80 to-gray-50/80 rounded-2xl mb-4 flex items-center justify-center overflow-hidden shadow-inner backdrop-blur-sm">
                     {/* Decorative background pattern */}
                     <div className="absolute inset-0 opacity-10">
                         <div className="absolute top-2 left-2 w-4 h-4 bg-blue-400 rounded-full"></div>

@@ -136,9 +136,58 @@ function App() {
     }
 
     return (
-        <div className="App min-h-screen bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-50">
+        <div className="App min-h-screen relative overflow-hidden">
+            {/* Dynamic Background */}
+            <div className="fixed inset-0 z-0">
+                {/* Base gradient */}
+                <div className="absolute inset-0 bg-gradient-to-br from-blue-400 via-purple-500 to-indigo-600"></div>
+                
+                {/* Animated gradient overlay */}
+                <div className="absolute inset-0 bg-gradient-to-tr from-pink-400/30 via-yellow-300/20 to-green-400/30 animate-pulse"></div>
+                
+                {/* Floating orbs */}
+                <div className="absolute top-20 left-10 w-32 h-32 bg-yellow-300/20 rounded-full blur-xl animate-float-slow"></div>
+                <div className="absolute top-40 right-20 w-24 h-24 bg-red-400/25 rounded-full blur-lg animate-float-medium"></div>
+                <div className="absolute bottom-32 left-1/4 w-40 h-40 bg-blue-300/15 rounded-full blur-2xl animate-float-slow"></div>
+                <div className="absolute bottom-20 right-1/3 w-28 h-28 bg-green-400/20 rounded-full blur-xl animate-float-fast"></div>
+                <div className="absolute top-1/3 left-1/2 w-36 h-36 bg-purple-400/15 rounded-full blur-2xl animate-float-medium"></div>
+                
+                {/* Pokeball patterns */}
+                <div className="absolute top-16 right-16 w-16 h-16 opacity-10">
+                    <div className="w-full h-full border-4 border-white rounded-full relative">
+                        <div className="absolute top-1/2 left-0 right-0 h-1 bg-white transform -translate-y-1/2"></div>
+                        <div className="absolute top-1/2 left-1/2 w-4 h-4 bg-white rounded-full transform -translate-x-1/2 -translate-y-1/2 border-2 border-gray-300"></div>
+                    </div>
+                </div>
+                <div className="absolute bottom-24 left-16 w-12 h-12 opacity-8">
+                    <div className="w-full h-full border-3 border-white rounded-full relative">
+                        <div className="absolute top-1/2 left-0 right-0 h-0.5 bg-white transform -translate-y-1/2"></div>
+                        <div className="absolute top-1/2 left-1/2 w-3 h-3 bg-white rounded-full transform -translate-x-1/2 -translate-y-1/2 border border-gray-300"></div>
+                    </div>
+                </div>
+                
+                {/* Geometric shapes */}
+                <div className="absolute top-1/4 right-1/4 w-20 h-20 border-2 border-white/10 rotate-45 animate-spin-slow"></div>
+                <div className="absolute bottom-1/3 left-1/5 w-16 h-16 border-2 border-yellow-300/15 rotate-12 animate-pulse"></div>
+                
+                {/* Particle effects */}
+                <div className="absolute inset-0">
+                    <div className="absolute top-1/4 left-1/6 w-2 h-2 bg-white/30 rounded-full animate-twinkle"></div>
+                    <div className="absolute top-1/3 right-1/4 w-1.5 h-1.5 bg-yellow-300/40 rounded-full animate-twinkle-delayed"></div>
+                    <div className="absolute bottom-1/4 left-1/3 w-2.5 h-2.5 bg-pink-300/30 rounded-full animate-twinkle"></div>
+                    <div className="absolute bottom-1/3 right-1/5 w-1 h-1 bg-blue-300/50 rounded-full animate-twinkle-delayed"></div>
+                    <div className="absolute top-2/3 left-2/3 w-2 h-2 bg-green-300/35 rounded-full animate-twinkle"></div>
+                </div>
+                
+                {/* Subtle grid pattern */}
+                <div className="absolute inset-0 opacity-5" style={{
+                    backgroundImage: `radial-gradient(circle at 1px 1px, white 1px, transparent 0)`,
+                    backgroundSize: '40px 40px'
+                }}></div>
+            </div>
+            
             <Header />
-            <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-12">
+            <main className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-12">
                 <SearchBar onChange={handleSearch} />
 
                 {isLoading && renderLoading()}
