@@ -70,17 +70,3 @@ function SearchBar({ onChange }) {
 }
 
 export default SearchBar;
-                <input
-                    type="text"
-                    placeholder="Search for Pokémon cards..."
-                    value={search}
-                    onChange={(e) => setSearch(e.target.value)}
-                    className="w-full px-6 py-4 text-lg rounded-full border-2 border-white/20 bg-white/90 backdrop-blur-sm shadow-lg focus:outline-none focus:ring-4 focus:ring-blue-400/50 focus:border-blue-400 transition-all duration-300 placeholder-gray-500"
-                    style={{ fontFamily: "'Fredoka', sans-serif" }}
-                />
-            </div>
-        </div>
-    );
-}
-
-export default SearchBar;
