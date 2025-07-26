@@ -1,19 +1,24 @@
 function CardItem({ card }) {
     return (
-        <div className="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow duration-300">
-            <div className="p-4">
+        <div className="bg-white rounded-lg shadow-md p-4">
+            <div className="w-full h-48 bg-gray-200 rounded-lg mb-3 flex items-center justify-center">
                 <img 
                     src={card.images?.small || '/placeholder-card.png'} 
                     alt={card.name || 'Pokemon card'}
-                    className="w-full h-auto rounded-lg"
+                    className="w-full h-full object-cover rounded-lg"
                     onError={(e) => {
-                        e.target.src = '/placeholder-card.png';
+                        e.target.style.display = 'none';
+                        e.target.nextSibling.style.display = 'flex';
                     }}
                 />
-                <h3 className="text-center mt-3 text-lg font-semibold text-gray-800">
-                    {card.name || 'Unknown Pokemon'}
-                </h3>
+                <div className="hidden text-gray-500 text-sm font-medium">
+                    {card.name || 'Pokemon'}
+                </div>
             </div>
+            
+            <p className="text-center text-sm font-semibold text-gray-800">
+                {card.name || 'Unknown Pokemon'}
+            </p>
         </div>
     );
 }

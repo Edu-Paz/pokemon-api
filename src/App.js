@@ -11,10 +11,10 @@ function App() {
         console.log("Searching for:", searchTerm);
 
         if (!searchTerm.trim()) {
-          setCards([]);
-          setIsLoading(false);
-          return;
-      }
+            setCards([]);
+            setIsLoading(false);
+            return;
+        }
 
         setIsLoading(true);
 
@@ -48,7 +48,7 @@ function App() {
             );
 
             setCards(filteredCards);
-            setIsLoading(false);  // ← Loading some, cards aparecem
+            setIsLoading(false);
         }, 2000);
     };
 
@@ -58,14 +58,12 @@ function App() {
             <main className="max-w-4xl mx-auto p-4">
                 <SearchBar onChange={handleSearch} />
 
-                {/* Loading centralizado */}
                 {isLoading && (
                     <div className="flex justify-center items-center py-8">
                         <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-500"></div>
                     </div>
                 )}
 
-                {/* Cards aparecem quando não está carregando */}
                 {!isLoading && cards.length > 0 && (
                     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mt-8">
                         {cards.map((card) => (
