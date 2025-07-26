@@ -41,10 +41,6 @@ function CardItem({ card }) {
                                 {card.name || "Unknown Pokemon"}
                             </h3>
 
-                            <span className="absolute bottom-3 right-3 bg-gradient-to-r from-yellow-400 to-red-500 text-white px-2 py-1 rounded-full text-xs font-bold shadow">
-                                Rare
-                            </span>
-
                             <div className="absolute bottom-3 left-3">
                                 <img 
                                     src={pokeball} 

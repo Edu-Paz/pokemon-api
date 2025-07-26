@@ -2,14 +2,28 @@ import logo from "../assets/pokemon-logo.png";
 
 function Header() {
     return (
-        <header className="py-8 bg-gradient-to-r from-yellow-300 via-red-400 to-blue-400 shadow-lg pb-8 flex flex-col items-center">
-            <img src={logo} alt="Pokemon Logo" className="h-12 mb-2 drop-shadow-lg" />
-            <h1
-                className="text-4xl font-bold text-white drop-shadow-lg"
-                style={{ fontFamily: "'Fredoka', sans-serif" }}
-            >
-                Pokedex
-            </h1>
+        <header className="relative z-20 py-20 px-4">
+            <div className="flex flex-col items-center">
+                <div className="mb-6 transform hover:scale-105 transition-transform duration-300">
+                    <img 
+                        src={logo} 
+                        alt="Pokemon Logo" 
+                        className="h-20 sm:h-24 drop-shadow-2xl filter brightness-110" 
+                    />
+                </div>
+                
+                <div className="text-center">
+                    <h1
+                        className="text-5xl sm:text-6xl lg:text-7xl font-bold text-white mb-4 drop-shadow-2xl tracking-tight"
+                        style={{ fontFamily: "'Fredoka', sans-serif" }}
+                    >
+                        Pokédex
+                    </h1>
+                    <p className="text-white/95 text-lg sm:text-xl font-medium drop-shadow-lg max-w-2xl mx-auto">
+                        Discover and explore the world of Pokémon cards
+                    </p>
+                </div>
+            </div>
         </header>
     );
 }
