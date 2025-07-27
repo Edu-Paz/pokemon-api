@@ -1,4 +1,7 @@
-// src/data/mockCards.js
+/**
+ * Mock data for Pokémon cards used during development and testing.
+ * Provides sample cards when the real API is unavailable.
+ */
 const mockCards = [
     {
         id: "base1-1",
