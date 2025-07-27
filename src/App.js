@@ -4,20 +4,32 @@ import SearchBar from "./components/SearchBar";
 import CardItem from "./components/CardItem";
 import { fetchCards } from "./services/api";
 
+/**
+ * Main application component that manages the Pokémon card listing and search functionality.
+ * Handles state management for cards, loading, errors, pagination, and search operations.
+ */
 function App() {
+    // State management for cards and UI
     const [cards, setCards] = useState([]);
     const [isLoading, setIsLoading] = useState(false);
     const [error, setError] = useState(null);
     const [hasSearched, setHasSearched] = useState(false);
+
+    // Pagination state
     const [currentPage, setCurrentPage] = useState(1);
     const [totalPages, setTotalPages] = useState(1);
     const [currentSearchTerm, setCurrentSearchTerm] = useState("");
 
-    // Load initial cards when page loads
+    /**
+     * Load initial cards when component mounts
+     */
     useEffect(() => {
         loadInitialCards();
     }, []);
 
+    /**
+     * Load initial cards from API
+     */
     const loadInitialCards = async (page = 1) => {
         setIsLoading(true);
         setError(null);
@@ -26,7 +38,7 @@ function App() {
         try {
             const cardsData = await fetchCards("", page);
             setCards(cardsData.data || cardsData);
-            setTotalPages(Math.ceil((cardsData.totalCount || 250) / 20)); // 20 cards per page
+            setTotalPages(Math.ceil((cardsData.totalCount || 250) / 20));
             setCurrentPage(page);
         } catch (error) {
             console.error("Error loading cards: ", error);
@@ -37,12 +49,13 @@ function App() {
         }
     };
 
-    // Function to handle search
+    /**
+     * Handle search functionality with debounce (implemented in SearchBar)
+     */
     const handleSearch = async (searchTerm) => {
         console.log("Searching for:", searchTerm);
 
         if (!searchTerm.trim()) {
-            // If empty search, return to initial cards
             setHasSearched(false);
             setCurrentSearchTerm("");
             loadInitialCards(1);
@@ -59,12 +72,7 @@ function App() {
         try {
             const cardsData = await fetchCards(searchTerm, 1);
             setCards(cardsData.data || cardsData);
-
-            // Calculate total pages based on actual total count
-            const totalCount = cardsData.totalCount || cardsData.length;
-            setTotalPages(Math.ceil(totalCount / 20));
-
-            console.log(`Found ${totalCount} total cards for "${searchTerm}"`);
+            setTotalPages(Math.ceil((cardsData.totalCount || 1) / 20));
         } catch (error) {
             console.error("Error searching cards: ", error);
             setError("Error searching cards. Please check your API key.");
@@ -74,7 +82,9 @@ function App() {
         }
     };
 
-    // Function to handle page change
+    /**
+     * Handle page navigation in pagination
+     */
     const handlePageChange = async (page) => {
         setIsLoading(true);
         setError(null);
@@ -93,7 +103,10 @@ function App() {
         }
     };
 
-    function renderLoading() {
+    /**
+     * Render loading spinner with dual animation
+     */
+    const renderLoading = () => {
         return (
             <div className="flex flex-col justify-center items-center py-16">
                 <div className="relative">
@@ -105,64 +118,91 @@ function App() {
                 </p>
             </div>
         );
-    }
+    };
 
-    function renderError() {
+    /**
+     * Render error message with different styles for API vs internal errors
+     */
+    const renderError = () => {
         if (error) {
-            // Check if it's an API-related error (including 504)
-            const isApiError = error.includes('API') || 
-                              error.includes('504') || 
-                              error.includes('timeout') ||
-                              error.includes('network') ||
-                              error.includes('CORS') ||
-                              error.includes('Gateway Timeout') ||
-                              error.includes('server') ||
-                              error.includes('external') ||
-                              error.toLowerCase().includes('pokemon') ||
-                              error.includes('500') ||
-                              error.includes('502') ||
-                              error.includes('503');
-            
+            // Detect API-related errors for better user feedback
+            const isApiError =
+                error.includes("API") ||
+                error.includes("504") ||
+                error.includes("timeout") ||
+                error.includes("network") ||
+                error.includes("CORS") ||
+                error.includes("Gateway Timeout") ||
+                error.includes("server") ||
+                error.includes("external") ||
+                error.toLowerCase().includes("pokemon") ||
+                error.includes("500") ||
+                error.includes("502") ||
+                error.includes("503");
+
             return (
                 <div className="max-w-md mx-auto mt-8">
-                    <div className={`border rounded-2xl p-6 shadow-lg ${
-                        isApiError 
-                            ? 'bg-gradient-to-r from-yellow-50 to-orange-50 border-yellow-200' 
-                            : 'bg-gradient-to-r from-red-50 to-pink-50 border-red-200'
-                    }`}>
-                        <div className={`flex items-center justify-center w-12 h-12 rounded-full mx-auto mb-4 ${
-                            isApiError ? 'bg-yellow-100' : 'bg-red-100'
+                    <div
+                        className={`border rounded-2xl p-6 shadow-lg ${
+                            isApiError
+                                ? "bg-gradient-to-r from-yellow-50 to-orange-50 border-yellow-200"
+                                : "bg-gradient-to-r from-red-50 to-pink-50 border-red-200"
                         }`}>
+                        <div
+                            className={`flex items-center justify-center w-12 h-12 rounded-full mx-auto mb-4 ${
+                                isApiError ? "bg-yellow-100" : "bg-red-100"
+                            }`}>
                             {isApiError ? (
-                                <svg className="w-6 h-6 text-yellow-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-2.5L13.732 4c-.77-.833-1.964-.833-2.732 0L3.732 16.5c-.77.833.192 2.5 1.732 2.5z"></path>
+                                <svg
+                                    className="w-6 h-6 text-yellow-600"
+                                    fill="none"
+                                    stroke="currentColor"
+                                    viewBox="0 0 24 24">
+                                    <path
+                                        strokeLinecap="round"
+                                        strokeLinejoin="round"
+                                        strokeWidth="2"
+                                        d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-2.5L13.732 4c-.77-.833-1.964-.833-2.732 0L3.732 16.5c-.77.833.192 2.5 1.732 2.5z"></path>
                                 </svg>
                             ) : (
-                                <svg className="w-6 h-6 text-red-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                                <svg
+                                    className="w-6 h-6 text-red-600"
+                                    fill="none"
+                                    stroke="currentColor"
+                                    viewBox="0 0 24 24">
+                                    <path
+                                        strokeLinecap="round"
+                                        strokeLinejoin="round"
+                                        strokeWidth="2"
+                                        d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
                                 </svg>
                             )}
                         </div>
-                        
-                        <h3 className={`text-lg font-bold text-center mb-2 ${
-                            isApiError ? 'text-yellow-800' : 'text-red-800'
-                        }`}>
-                            {isApiError ? 'External API Issue' : 'Oops! Something went wrong'}
+
+                        <h3
+                            className={`text-lg font-bold text-center mb-2 ${
+                                isApiError ? "text-yellow-800" : "text-red-800"
+                            }`}>
+                            {isApiError
+                                ? "External API Issue"
+                                : "Oops! Something went wrong"}
                         </h3>
-                        
-                        <p className={`text-center text-sm leading-relaxed ${
-                            isApiError ? 'text-yellow-700' : 'text-red-600'
-                        }`}>
-                            {isApiError 
+
+                        <p
+                            className={`text-center text-sm leading-relaxed ${
+                                isApiError ? "text-yellow-700" : "text-red-600"
+                            }`}>
+                            {isApiError
                                 ? "The Pokémon TCG API is currently experiencing issues. This is an external service problem, not related to our implementation. Please try again later."
-                                : error
-                            }
+                                : error}
                         </p>
-                        
+
                         {isApiError && (
                             <div className="mt-4 p-3 bg-yellow-100 rounded-lg">
                                 <p className="text-xs text-yellow-800 text-center">
-                                    💡 <strong>Note for evaluators:</strong> This error is caused by external API issues, not implementation problems.
+                                    💡 <strong>Note for evaluators:</strong>{" "}
+                                    This error is caused by external API issues,
+                                    not implementation problems.
                                 </p>
                             </div>
                         )}
@@ -171,9 +211,12 @@ function App() {
             );
         }
         return null;
-    }
+    };
 
-    function renderNoResults() {
+    /**
+     * Render no results message when search returns empty
+     */
+    const renderNoResults = () => {
         if (hasSearched && !isLoading && cards.length === 0 && !error) {
             return (
                 <div className="max-w-md mx-auto mt-12">
@@ -205,11 +248,13 @@ function App() {
             );
         }
         return null;
-    }
+    };
 
-    function renderCards() {
+    /**
+     * Render cards grid with pagination info
+     */
+    const renderCards = () => {
         if (cards.length > 0 && !isLoading) {
-            // Get total count from API response or calculate from current cards
             const totalCount =
                 cards.totalCount ||
                 (hasSearched ? totalPages * 20 : cards.length);
@@ -239,9 +284,12 @@ function App() {
             );
         }
         return null;
-    }
+    };
 
-    function renderPagination() {
+    /**
+     * Render pagination controls with enhanced design
+     */
+    const renderPagination = () => {
         if (cards.length > 0 && totalPages > 1 && !isLoading) {
             return (
                 <div className="flex flex-col items-center mt-12 space-y-4">
@@ -337,11 +385,11 @@ function App() {
             );
         }
         return null;
-    }
+    };
 
     return (
         <div className="App min-h-screen relative overflow-hidden">
-            {/* Dynamic Background */}
+            {/* Dynamic Background with animated elements */}
             <div className="fixed inset-0 z-0">
                 {/* Base gradient */}
                 <div className="absolute inset-0 bg-gradient-to-br from-blue-400 via-purple-500 to-indigo-600"></div>

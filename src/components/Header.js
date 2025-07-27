@@ -1,9 +1,14 @@
 import logo from "../assets/pokemon-logo.png";
 
+/**
+ * Header component that displays the application logo and title.
+ * Provides a visual identity for the Pokédex app.
+ */
 function Header() {
     return (
         <header className="relative z-20 py-20 px-4">
             <div className="flex flex-col items-center">
+                {/* Logo with hover effect */}
                 <div className="mb-6 transform hover:scale-105 transition-transform duration-300">
                     <img 
                         src={logo} 
@@ -12,6 +17,7 @@ function Header() {
                     />
                 </div>
                 
+                {/* App title and subtitle */}
                 <div className="text-center">
                     <h1
                         className="text-5xl sm:text-6xl lg:text-7xl font-bold text-white mb-4 drop-shadow-2xl tracking-tight"
