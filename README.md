@@ -64,13 +64,5 @@ A React application for browsing Pokémon Trading Card Game cards with search an
 -   `npm test` - Run tests
 -   `npm run build` - Production build
 
-## 📁 Project Structure
-
-src/
-├── components/ # React components
-├── config/ # API configuration
-├── services/ # API functions
-├── data/ # Mock data
-└── assets/ # Images
 
 **Note**: All requirements implemented with clean, maintainable code following React best practices.
