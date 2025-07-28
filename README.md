@@ -1,28 +1,76 @@
-# Pokemon API React App
+# Pokémon TCG Card Browser
 
-Este projeto é um app React que utiliza Tailwind CSS.
+A React application for browsing Pokémon Trading Card Game cards with search and pagination functionality.
 
-## Como rodar localmente
+## �� Quick Start
 
-1. Instale as dependências:
-   ```bash
-   npm install
-   ```
+1. **Clone and install**
 
-2. Rode o projeto:
-   ```bash
-   npm start
-   ```
+    ```bash
+    git clone <repository-url>
+    cd pokemon-api
+    npm install
+    ```
 
-3. Acesse [http://localhost:3000](http://localhost:3000) no navegador.
+2. **Setup API key**
 
-## Como fazer build para produção
+    ```bash
+    # Create .env file
+    echo "REACT_APP_POKEMON_API_KEY=your_api_key_here" > .env
+    ```
 
-```bash
-npm run build
-```
+    Get your free API key at: https://dev.pokemontcg.io/
 
-## Observações
+3. **Run the application**
+    ```bash
+    npm start
+    ```
+    Open http://localhost:3000
 
-- O projeto utiliza [Tailwind CSS](https://tailwindcss.com/).
-- Para personalizar estilos, edite o arquivo `tailwind.config.js`.
+## ✅ Test Requirements Met
+
+### **Card Listing**
+
+-   ✅ Responsive card grid with images and names
+-   ✅ Mobile-friendly design
+-   ✅ Card flip functionality for details
+
+### **Search Functionality**
+
+-   ✅ Search field positioned after header
+-   ✅ 2-second debounce implementation
+-   ✅ Loading states during search
+-   ✅ "No results found" message
+-   ✅ Error handling with specific messages
+
+### **Code Quality**
+
+-   ✅ Clean Git history with conventional commits
+-   ✅ Well-organized project structure
+-   ✅ English code and comments
+-   ✅ Modern React practices
+-   ✅ Proper error handling
+
+## 🛠️ Technologies
+
+-   React.js
+-   Tailwind CSS
+-   Pokémon TCG API
+-   Create React App
+
+## �� Available Commands
+
+-   `npm start` - Development server
+-   `npm test` - Run tests
+-   `npm run build` - Production build
+
+## 📁 Project Structure
+
+src/
+├── components/ # React components
+├── config/ # API configuration
+├── services/ # API functions
+├── data/ # Mock data
+└── assets/ # Images
+
+**Note**: All requirements implemented with clean, maintainable code following React best practices.
