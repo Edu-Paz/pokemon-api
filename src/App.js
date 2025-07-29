@@ -19,6 +19,7 @@ function App() {
     const [currentPage, setCurrentPage] = useState(1);
     const [totalPages, setTotalPages] = useState(1);
     const [currentSearchTerm, setCurrentSearchTerm] = useState("");
+    const [totalCount, setTotalCount] = useState(0);
 
     /**
      * Load initial cards when component mounts
@@ -38,6 +39,7 @@ function App() {
         try {
             const cardsData = await fetchCards("", page);
             setCards(cardsData.data || cardsData);
+            setTotalCount(cardsData.totalCount || 250);
             setTotalPages(Math.ceil((cardsData.totalCount || 250) / 20));
             setCurrentPage(page);
         } catch (error) {
@@ -72,6 +74,7 @@ function App() {
         try {
             const cardsData = await fetchCards(searchTerm, 1);
             setCards(cardsData.data || cardsData);
+            setTotalCount(cardsData.totalCount || 1); 
             setTotalPages(Math.ceil((cardsData.totalCount || 1) / 20));
         } catch (error) {
             console.error("Error searching cards: ", error);
@@ -255,10 +258,9 @@ function App() {
      */
     const renderCards = () => {
         if (cards.length > 0 && !isLoading) {
-            const totalCount =
-                cards.totalCount ||
-                (hasSearched ? totalPages * 20 : cards.length);
-
+            // Get the actual total count from the API response
+            const totalCount = cards.totalCount || (totalPages * 20);
+            
             return (
                 <div className="mt-12">
                     <div className="text-center mb-8">
