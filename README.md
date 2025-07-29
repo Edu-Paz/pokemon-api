@@ -58,11 +58,5 @@ A React application for browsing Pokémon Trading Card Game cards with search an
 -   Pokémon TCG API
 -   Create React App
 
-## �� Available Commands
-
--   `npm start` - Development server
--   `npm test` - Run tests
--   `npm run build` - Production build
-
 
 **Note**: All requirements implemented with clean, maintainable code following React best practices.
