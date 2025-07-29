@@ -5,8 +5,7 @@ import CardItem from "./components/CardItem";
 import { fetchCards } from "./services/api";
 
 /**
- * Main application component that manages the Pokémon card listing and search functionality.
- * Handles state management for cards, loading, errors, pagination, and search operations.
+ * Main application component for Pokémon card listing and search
  */
 function App() {
     // State management for cards and UI
@@ -52,7 +51,7 @@ function App() {
     };
 
     /**
-     * Handle search functionality with debounce (implemented in SearchBar)
+     * Handle search with debounce (implemented in SearchBar)
      */
     const handleSearch = async (searchTerm) => {
         console.log("Searching for:", searchTerm);
@@ -74,7 +73,7 @@ function App() {
         try {
             const cardsData = await fetchCards(searchTerm, 1);
             setCards(cardsData.data || cardsData);
-            setTotalCount(cardsData.totalCount || 1); 
+            setTotalCount(cardsData.totalCount || 1);
             setTotalPages(Math.ceil((cardsData.totalCount || 1) / 20));
         } catch (error) {
             console.error("Error searching cards: ", error);
@@ -86,7 +85,7 @@ function App() {
     };
 
     /**
-     * Handle page navigation in pagination
+     * Handle page navigation
      */
     const handlePageChange = async (page) => {
         setIsLoading(true);
@@ -107,7 +106,7 @@ function App() {
     };
 
     /**
-     * Render loading spinner with dual animation
+     * Render loading spinner
      */
     const renderLoading = () => {
         return (
@@ -124,7 +123,7 @@ function App() {
     };
 
     /**
-     * Render error message with different styles for API vs internal errors
+     * Render error message
      */
     const renderError = () => {
         if (error) {
@@ -217,7 +216,7 @@ function App() {
     };
 
     /**
-     * Render no results message when search returns empty
+     * Render no results message
      */
     const renderNoResults = () => {
         if (hasSearched && !isLoading && cards.length === 0 && !error) {
@@ -254,13 +253,13 @@ function App() {
     };
 
     /**
-     * Render cards grid with pagination info
+     * Render cards grid
      */
     const renderCards = () => {
         if (cards.length > 0 && !isLoading) {
             // Get the actual total count from the API response
-            const totalCount = cards.totalCount || (totalPages * 20);
-            
+            const totalCount = cards.totalCount || totalPages * 20;
+
             return (
                 <div className="mt-12">
                     <div className="text-center mb-8">
@@ -289,7 +288,7 @@ function App() {
     };
 
     /**
-     * Render pagination controls with enhanced design
+     * Render pagination controls
      */
     const renderPagination = () => {
         if (cards.length > 0 && totalPages > 1 && !isLoading) {
