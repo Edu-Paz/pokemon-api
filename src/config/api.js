@@ -1,9 +1,11 @@
 /**
  * API configuration for the Pokémon TCG API.
- * Defines the base URL and default headers for all requests.
+ * Uses proxy in development, full URL in production.
  */
 const API_CONFIG = {
-    baseUrl: "/v2", // Uses proxy in package.json for local development
+    baseUrl: process.env.NODE_ENV === 'production' 
+        ? "https://api.pokemontcg.io/v2"  // Produção: URL completa
+        : "/v2",                          // Desenvolvimento: usa proxy
     headers: {
         "Content-Type": "application/json",
     },
